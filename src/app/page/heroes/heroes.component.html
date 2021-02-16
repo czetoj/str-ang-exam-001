@@ -1,0 +1,40 @@
+<div>
+    <h3 class="text-center m-5">Heroes</h3>
+
+    <div class="row">
+        <div class="col-3">
+            <select [(ngModel)]="filterKey" class="form-control">
+                <option value="">Válassz kategóriát</option>
+                <option *ngFor="let col of cols" [value]="col.key">{{ col.text }}</option>
+            </select>
+        </div>
+        <div class="col-9">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+                <input [(ngModel)]="phrase" type="text" class="form-control" placeholder="search">
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th *ngFor="let col of cols" (click)="onColumnSelect(col.key)">{{ col.text }} </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hero of heroList | filter: filterKey : phrase | sort: sortKey">
+                <td>{{hero.id}}</td>
+                <td>{{hero.name}} </td>
+                <td>{{hero.superPower}}</td>
+                <td>{{hero.address}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
